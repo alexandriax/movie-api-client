@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
