@@ -11,10 +11,12 @@ export const MainView = () => {
           .then((data) => {
             const moviesFromApi = data.docs.map ((doc) => {
                 return {
-                    id: doc.key,
+                    id: doc.id,
                     title: doc.title,
-                    image: '',
-                    author: doc.author_name?.[0]
+                    image: doc.image || '',
+                    description: doc.description,
+                    director: doc.director?.name,
+                    genre: doc.genre?.name
                 };
             });
 
