@@ -5,12 +5,20 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = () => {
+    const storedUser = JSON.parse(localStorage.getITem("user"));
+    const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(storedUser? storedUser : null);
+    const [token,setToken] = useState(storedToken? storedToken : null);
 
     useEffect(() => {
-        fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies')
+        if(!token) {
+            return;
+        }
+        fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}`}
+        })
           .then((response) => response.json())
           .then((data) => {
             const moviesFromApi = data.docs.map ((doc) => {
@@ -26,7 +34,7 @@ export const MainView = () => {
 
             setMovies(moviesFromApi);
           });
-    }, []);
+    }, [token]);
 
     if (!user) {
         return <LoginView />;
