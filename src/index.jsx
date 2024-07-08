@@ -4,7 +4,11 @@ import "./index.scss";
 
 //main component
 const App = () => {
-    return <MainView />;
+    return (
+    <Container>
+      <MainView />
+    </Container>
+    );
 };
 
 //finds root of app
