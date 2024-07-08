@@ -18,15 +18,15 @@ export const MainView = () => {
     const [token, setToken] = useState(storedToken);
 
     useEffect(() => {
-        if(!token) {
+        if (!token) {
             return;
         }
         fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies', {
-            headers: { Authorization: `Bearer ${token}`}
+            headers: { Authorization: `Bearer ${token}` }
         })
-          .then((response) => response.json())
-          .then((data) => {
-            const moviesFromApi = data.docs.map ((doc) => {
+        .then((response) => response.json())
+        .then((data) => {
+            const moviesFromApi = data.docs.map((doc) => {
                 return {
                     id: doc.id,
                     title: doc.title,
@@ -38,7 +38,7 @@ export const MainView = () => {
             });
 
             setMovies(moviesFromApi);
-          });
+        });
     }, [token]);
 
     if (!user) {
