@@ -9,25 +9,6 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 export const MainView = () => {
-    const [movies, setMovies] = useState([]);
-    useEffect(() => {
-        fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies')
-          .then((response) => response.json())
-          .then((data) => {
-            const moviesFromApi = data.docs.map ((doc) => {
-                return {
-                    id: doc.id,
-                    title: doc.title,
-                    image: doc.image || '',
-                    description: doc.description,
-                    director: doc.director?.name,
-                    genre: doc.genre?.name
-                };
-            });
-
-            setMovies(moviesFromApi);
-          });
-    }, []);
 
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [user, setUser] = useState(storedUser? storedUser : null);
