@@ -32,45 +32,73 @@ export const SignupView = () => {
       });
        
     return (
-        <form onSubmit={handleSubmit}>
-        <label>
-            Username:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              minLength="3"
-            />
-        </label>
-        <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-        </label>
-        <label>
-            Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-        </label>
-        <label>
-            Birthday: 
-            <input
-              type="date"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
-              required
-            />
-        </label>
-        <button type="submit">submit</button>
-        </form>
+      <Container>
+        <Row>
+          <Col md={5}>
+            <CardGroup>
+            <Card>
+            <Card.Body>
+            <Card.Title>sign up</Card.Title>
+            <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>
+                Username:
+               <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  minLength="3"
+                  placeholder="enter a username"
+               />
+              </Form.Label>
+             </Form.Group>
+            <Form.Group>
+              <Form.Label>
+                Password:
+               <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength="6"
+                  placeholder="password must be 6 or more characters"
+               />
+             </Form.Label>
+           </Form.Group>
+           <Form.Group>
+             <Form.Label>
+                Email:
+               <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="enter an email"
+               />
+             </Form.Label>
+           </Form.Group>
+           <Form.Group>
+             <Form.Label>
+                Birthday: 
+               <Form.Control
+                  type="date"
+                  value={birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
+                  required
+                  placeholder="enter a birthday"
+               />
+             </Form.Label>
+           </Form.Group>
+           <Button type="submit">submit</Button>
+           </Form>
+           </Card.Body>
+           </Card>
+
+          </CardGroup>
+           
+         </Col>
+        </Row>
+      </Container>
     );
 };
