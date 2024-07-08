@@ -9,6 +9,8 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 export const MainView = () => {
+    const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const storedToken = localStorage.getItem('token') ? localStorage.getItem('token') : null;
 
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [user, setUser] = useState(storedUser? storedUser : null);
