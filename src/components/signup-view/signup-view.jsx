@@ -7,14 +7,14 @@ export const SignupView = () => {
     const [email, setEmail] = useState("");
     const [birthday, setBirthday] = useState("");
 
-    const handleSubmit = (event) => {};
+    const handleSubmit = (event) => {;
       event.preventDefault();
 
       const data ={
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday
+        username: username,
+        password: password,
+        email: email,
+        birthday: birthday
       };
 
       fetch("https://moo-movies-10a7ea08abc9.herokuapp.com/users", {
@@ -30,7 +30,7 @@ export const SignupView = () => {
         } else {
             alert("signup failed!");
         }
-      });
+      })};
        
     return (
       <Container>
