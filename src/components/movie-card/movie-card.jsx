@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Card } from 'react-bootstrap';
 
 export const MovieCard = ({ movie, onMovieClick }) => {
     return (
@@ -6,8 +7,8 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Img variant='top' src={movie.image} />
         <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.director.name}</Card.Text>
-        <Card.Text>{movie.genre.name}</Card.Text>
+        <Card.Text>{movie.director?.name}</Card.Text>
+        <Card.Text>{movie.genre?.name}</Card.Text>
         </Card.Body>
       </Card>
     );
