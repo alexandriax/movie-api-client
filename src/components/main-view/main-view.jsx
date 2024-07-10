@@ -26,14 +26,14 @@ export const MainView = () => {
         })
         .then((response) => response.json())
         .then((data) => {
-            const moviesFromApi = data.docs.map((doc) => {
+            const moviesFromApi = data.map((doc) => {
                 return {
                     id: doc.id,
                     title: doc.title,
                     image: doc.image || '',
                     description: doc.description,
-                    director: doc.director?.name,
-                    genre: doc.genre?.name
+                    director: doc.director,
+                    genre: doc.genre
                 };
             });
 
@@ -57,7 +57,7 @@ export const MainView = () => {
                 </>
             ) : selectedMovie ? (
                 <Col md={8}>
-                    <Button onClick={handleLogout}>Logout</Button>
+                    
                     <MovieView
                         movie={selectedMovie}
                         onBackClick={() => setSelectedMovie(null)}
