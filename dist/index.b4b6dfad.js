@@ -27406,7 +27406,7 @@ const MainView = ()=>{
                 return {
                     id: doc.id,
                     title: doc.title,
-                    image: doc.image || "",
+                    image: doc.image,
                     description: doc.description,
                     director: doc.director,
                     genre: doc.genre
@@ -27559,7 +27559,7 @@ MovieCard.propTypes = {
         title: (0, _propTypesDefault.default).string.isRequired,
         id: (0, _propTypesDefault.default).string.isRequired,
         description: (0, _propTypesDefault.default).string.isRequired,
-        image: (0, _propTypesDefault.default).string,
+        image: (0, _propTypesDefault.default).string.isRequired,
         director: (0, _propTypesDefault.default).shape({
             name: (0, _propTypesDefault.default).string.isRequired,
             description: (0, _propTypesDefault.default).string.isRequired

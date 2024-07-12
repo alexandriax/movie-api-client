@@ -30,7 +30,7 @@ export const MainView = () => {
                 return {
                     id: doc.id,
                     title: doc.title,
-                    image: doc.image || '',
+                    image: doc.image,
                     description: doc.description,
                     director: doc.director,
                     genre: doc.genre
