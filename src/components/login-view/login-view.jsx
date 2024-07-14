@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Button, Form, Card, CardGroup, Row, Col, Container} from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
@@ -8,8 +9,8 @@ export const LoginView = ({ onLoggedIn }) => {
         event.preventDefault();
 
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
 
         fetch("https://moo-movies-10a7ea08abc9.herokuapp.com/login", {
@@ -40,27 +41,48 @@ export const LoginView = ({ onLoggedIn }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input 
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Password:
-                <input 
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} 
-                required
-                />
-            </label>
-            <button type="submit">submit</button>
-        </form>
+        <Container>
+            <Row>
+                <Col md={5}>
+                    <CardGroup>
+                        <Card>
+                        <Card.Body>
+                        <Card.Title>log-in</Card.Title>
+                        <Form onSubmit={handleSubmit}>
+                           <Form.Group>
+                           <Form.Label>
+                              Username:
+                              <Form.Control
+                                  type="text"
+                                  value={username}
+                                  onChange={(e) => setUsername(e.target.value)}
+                                  required
+                                  placeholder="enter your username"
+                               />
+                          </Form.Label>
+                          </Form.Group>
+
+                          <Form.Group>
+                          <Form.Label>
+                             Password:
+                             <Form.Control
+                                 type="password"
+                                 value={password}
+                                 onChange={(e) => setPassword(e.target.value)} 
+                                 required
+                                 placeholder="enter your password"
+                               />
+                          </Form.Label>
+                          </Form.Group>
+                          <Button type="submit">submit</Button>
+                        </Form> 
+                        </Card.Body> 
+                        </Card>
+                    </CardGroup>
+                </Col>
+            </Row>
+        </Container>
+       
 
    
     );
