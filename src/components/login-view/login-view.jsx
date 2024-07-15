@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import PropTypes from 'prop-types';
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
-    const[password, setPassword] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,13 +34,6 @@ export const LoginView = ({ onLoggedIn }) => {
         .catch((e) => {
             alert("something went wrong");
         });
-        if (data.user) {
-            localStorage.setItem("user", JSON.stringify(data.user));
-            localStorage.setItem("token", data.token);
-            onLoggedIn(data.user, data.token);
-        } else {
-            alert("no such user")
-        }
     };
 
     return (
@@ -64,9 +58,9 @@ export const LoginView = ({ onLoggedIn }) => {
             </label>
             <button type="submit">submit</button>
         </form>
-
-   
     );
+};
 
-    
+LoginView.propTypes = {
+    onLoggedIn: PropTypes.func.isRequired
 };
