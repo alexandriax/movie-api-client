@@ -1,6 +1,14 @@
-import PropTypes from 'prop-types';
 
-export const MovieView = ({ movie, onBackClick }) => {
+import PropTypes from 'prop-types';
+import { Link, useParams } from 'react-router-dom';
+
+export const MovieView = ({ movies }) => {
+    const { movieId } = useParams();
+    const movie = movies.find(m => m.id === movieId); 
+
+    if (!movie) {
+        return <div>movie not found</div>;
+    }
     return (
         <div>
             <div>
