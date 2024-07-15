@@ -24,8 +24,9 @@ export const MainView = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            const moviesFromApi = data.docs.map ((doc) => {
+            const moviesFromApi = data.docs?.map((doc) => {
                 return {
+            
                     id: doc.id,
                     title: doc.title,
                     image: doc.image || '',
@@ -33,12 +34,12 @@ export const MainView = () => {
                     director: doc.director?.name,
                     genre: doc.genre?.name
                 };
+            
             });
 
             setMovies(moviesFromApi);
           });
     }, [token]);
-
     if (!user) {
         return (
         <>
