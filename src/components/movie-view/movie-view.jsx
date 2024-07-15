@@ -1,13 +1,11 @@
-
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ movie }) => {
     const { movieId } = useParams();
-    const movie = movies.find(m => m.id === movieId); 
 
     if (!movie) {
-        return <div>movie not found</div>;
+        return <div>Movie not found</div>;
     }
     return (
         <div>
@@ -24,11 +22,11 @@ export const MovieView = ({ movies }) => {
             </div>
             <div>
                 <span>Director: </span>
-                <span>{movie.director.name}</span> 
+                <span>{movie.director}</span> 
             </div>
             <div>
                 <span>Genre: </span>
-                <span>{movie.genre.name}</span>
+                <span>{movie.genre}</span>
             </div>
             <Link to="/">Back</Link>
         </div>
@@ -37,20 +35,15 @@ export const MovieView = ({ movies }) => {
 };
 
 MovieView.propTypes = {
-    movie: PropTypes.arrayOf (
-        PropTypes.shape({
+    movie: PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        director: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            description: PropTypes.string.isRequired
-        }).isRequired,
-        genre: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            description: PropTypes.string.isRequired
-        }).isRequired,
-    })
-).isRequired
-}; 
+        director: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+    }).isRequired
+};
+
+
+
