@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie, onMovieClick }) => {
     return (
-      <div>
+      <div onClick={() => onMovieClick(movie)}>
         <Link to={`/movies/${movie.id}`}>
           {movie.title}
         </Link>
@@ -26,4 +26,8 @@ MovieCard.propTypes = {
       description: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
+  onMovieClick: PropTypes.func.isRequired,
 };
+
+
+
