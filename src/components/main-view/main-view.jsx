@@ -12,6 +12,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const storedToken = localStorage.getItem('token');
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token,setToken] = useState(storedToken? storedToken : null);
 
@@ -40,6 +42,13 @@ export const MainView = () => {
             setMovies(moviesFromApi);
           });
     }, [token]);
+//gpt 
+    const handleLogin = (user, token) => {
+        setUser(user);
+        setToken(token);
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', token);
+    };
 
     return (
       <BrowserRouter>
