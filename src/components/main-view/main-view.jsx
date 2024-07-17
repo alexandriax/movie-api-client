@@ -47,6 +47,11 @@ export const MainView = () => {
         localStorage.setItem('token', token);
     };
 
+    const handleLogout = () => {
+        setUser(null);
+        setToken(null);
+        localStorage.clear();
+    };
     return (
         <BrowserRouter>
             <NavigationBar user={user} onLoggedOut={handleLogout} />
