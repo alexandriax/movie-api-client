@@ -28,8 +28,12 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant="link">Open</Button>
         </Link>
-      </div>
-    );
+        <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavorite}>
+          {isFavorite ? 'Unfavorite' : 'Favorite'}
+        </Button>
+      </Card.Body>
+    </Card>
+  );
 };
 
 MovieCard.propTypes = {
