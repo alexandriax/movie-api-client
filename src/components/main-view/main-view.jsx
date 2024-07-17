@@ -52,6 +52,11 @@ export const MainView = () => {
         setToken(null);
         localStorage.clear();
     };
+
+    const handleFavoriteToggle = (updatedUser) => {
+        setUser(updatedUser);
+    };
+
     return (
         <BrowserRouter>
             <NavigationBar user={user} onLoggedOut={handleLogout} />
