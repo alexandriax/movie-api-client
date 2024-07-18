@@ -27413,7 +27413,7 @@ const MainView = ()=>{
         }).then((response)=>response.json()).then((data)=>{
             const moviesFromApi = data.docs?.map((doc)=>{
                 return {
-                    id: doc.id,
+                    id: doc._id,
                     title: doc.title,
                     image: doc.image || "",
                     description: doc.description,
@@ -41997,9 +41997,9 @@ const MovieView = ({ movies, user, token, onFavoriteToggle })=>{
         lineNumber: 11,
         columnNumber: 16
     }, undefined);
-    const isFavorite = user.FavoriteMovies.includes(movie.id);
+    const isFavorite = user.favoriteMovies.includes(movie.id);
     const handleFavorite = ()=>{
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
+        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
             method: isFavorite ? "DELETE" : "POST",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -42163,7 +42163,7 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","react-bootstrap":"3AD9A"}],"9YtA0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42186,8 +42186,8 @@ const LoginView = ({ onLoggedIn })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
         fetch("https://moo-movies-10a7ea08abc9.herokuapp.com/login", {
             method: "POST",
@@ -42571,7 +42571,7 @@ const ProfileView = ({ user, movies, token, onLoggedOut })=>{
     const [userData, setUserData] = (0, _react.useState)(user);
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
-        if (movies.length > 0) setFavoriteMovies(movies.filter((m)=>user.FavoriteMovies.includes(m._id)));
+        if (movies?.length > 0) setFavoriteMovies(movies.filter((m)=>user.favoriteMovies.includes(m._id)));
     }, [
         user,
         movies
@@ -42592,7 +42592,7 @@ const ProfileView = ({ user, movies, token, onLoggedOut })=>{
         }).catch((e)=>console.error(e));
     };
     const handleDeregister = ()=>{
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.Username}`, {
+        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -42773,7 +42773,9 @@ const ProfileView = ({ user, movies, token, onLoggedOut })=>{
                         children: favoriteMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                 md: 4,
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                    movie: movie
+                                    movie: movie,
+                                    user: user,
+                                    token: token
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
                                     lineNumber: 92,
