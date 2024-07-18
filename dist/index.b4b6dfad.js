@@ -27411,7 +27411,7 @@ const MainView = ()=>{
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = data.docs?.map((doc)=>{
+            const moviesFromApi = data.map((doc)=>{
                 return {
                     id: doc._id,
                     title: doc.title,
@@ -35799,7 +35799,7 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 const MovieCard = ({ movie, user, token, onFavoriteToggle })=>{
-    const isFavorite = user.FavoriteMovies.includes(movie.id);
+    const isFavorite = user.favoriteMovies.includes(movie.id);
     const handleFavorite = ()=>{
         fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
             method: isFavorite ? "DELETE" : "POST",
