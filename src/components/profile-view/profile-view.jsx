@@ -9,8 +9,8 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
 
     useEffect(() => {
-        if (movies.length > 0) {
-            setFavoriteMovies(movies.filter(m => user.FavoriteMovies.includes(m._id)));
+        if (movies?.length > 0) {
+            setFavoriteMovies(movies.filter(m => user.favoriteMovies.includes(m._id)));
         }
     }, [user, movies]);
 
@@ -31,7 +31,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
     };
 
     const handleDeregister = () => {
-         fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.Username}`, {
+         fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}`}
         })
@@ -89,7 +89,11 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                 <Row>
                     {favoriteMovies.map(movie => (
                         <Col md={4} key={movie._id}>
-                            <MovieCard movie={movie} />
+                            <MovieCard 
+                              movie={movie}
+                              user={user}
+                              token={token}
+                              />
                         </Col>
                     ))}
                 </Row>
