@@ -36,11 +36,26 @@ export const MainView = () => {
                     genre: doc.genre?.name
                 };
             });
-
             setMovies(moviesFromApi);
         });
     }, [token]);
 
+    const handleLogin = (user, token) => {
+        setUser(user);
+        setToken(token);
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', token);
+    };
+
+    const handleLogout = () => {
+        setUser(null);
+        setToken(null);
+        localStorage.clear();
+    };
+
+    const handleFavoriteToggle = (updatedUser) => {
+        setUser(updatedUser);
+    };
 
     return (
         <Row className="justify-content-md-center">
