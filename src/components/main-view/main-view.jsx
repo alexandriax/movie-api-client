@@ -11,13 +11,11 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView = () => {
-    const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-    const storedToken = localStorage.getItem('token') ? localStorage.getItem('token') : null;
-
     const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
-    const [user, setUser] = useState(storedUser);
-    const [token, setToken] = useState(storedToken);
+    const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const storedToken = localStorage.getItem('token');
+    const [user, setUser] = useState(storedUser ? storedUser : null);
+    const [token, setToken] = useState(storedToken ? storedToken : null);
 
     useEffect(() => {
         if (!token) {
