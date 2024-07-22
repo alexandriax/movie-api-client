@@ -3,9 +3,15 @@ import { MainView } from "./components/main-view/main-view";
 import Container from "react-bootstrap/Container";
 import "bootstrap/./dist/css/bootstrap.min.css";
 import "./index.scss";
+import Container from 'react-bootstrap/Container';
 
 //main component
 const App = () => {
+    return (
+    <Container>
+      <MainView />
+    </Container>
+    );
     return (
     <Container>
       <MainView />

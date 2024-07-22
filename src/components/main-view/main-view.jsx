@@ -11,6 +11,9 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView = () => {
+    const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const storedToken = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+
     const [movies, setMovies] = useState([]);
     const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
     const storedToken = localStorage.getItem('token');
@@ -19,24 +22,30 @@ export const MainView = () => {
 
     useEffect(() => {
         if (!token) {
+        if (!token) {
             return;
         }
         fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` }
         })
+        .then((response) => response.json())
+        .then((data) => {
+            const moviesFromApi = data.map((doc) => {
         .then((response) => response.json())
         .then((data) => {
             const moviesFromApi = data.map((doc) => {
                 return {
                     id: doc._id,
                     title: doc.title,
-                    image: doc.image || '',
+                    image: doc.image,
                     description: doc.description,
-                    director: doc.director?.name,
-                    genre: doc.genre?.name
+                    director: doc.director,
+                    genre: doc.genre
                 };
             });
             setMovies(moviesFromApi);
+        });
         });
     }, [token]);
 
