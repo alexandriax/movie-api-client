@@ -32,6 +32,8 @@ export const MainView = () => {
                     title: doc.title,
                     image: doc.image || '',
                     description: doc.description,
+                    director: doc.director?.name,
+                    genre: doc.genre?.name
                 };
             });
 
