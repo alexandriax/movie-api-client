@@ -33,16 +33,16 @@ export const SignupView = () => {
       })};
        
     return (
-      <Container>
-        <Row>
-          <Col md={5}>
+      <Container className='d-flex justify-content-center align-items-center min-vh-100'>
+        <Row className='w-100'>
+          <Col md={8} lg={8}>
             <CardGroup>
             <Card>
             <Card.Body>
-            <Card.Title>sign up</Card.Title>
+            <Card.Title className='mb-4'>sign up</Card.Title>
             <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Label>
+              <Form.Label className='mb-4'>
                 Username:
                <Form.Control
                   type="text"
@@ -55,7 +55,7 @@ export const SignupView = () => {
               </Form.Label>
              </Form.Group>
             <Form.Group>
-              <Form.Label>
+              <Form.Label className='mb-4'>
                 Password:
                <Form.Control
                   type="password"
@@ -68,7 +68,7 @@ export const SignupView = () => {
              </Form.Label>
            </Form.Group>
            <Form.Group>
-             <Form.Label>
+             <Form.Label className='mb-4'>
                 Email:
                <Form.Control
                   type="email"
@@ -80,7 +80,7 @@ export const SignupView = () => {
              </Form.Label>
            </Form.Group>
            <Form.Group>
-             <Form.Label>
+             <Form.Label className='mb-4'>
                 Birthday: 
                <Form.Control
                   type="date"
@@ -91,7 +91,7 @@ export const SignupView = () => {
                />
              </Form.Label>
            </Form.Group>
-           <Button type="submit">submit</Button>
+           <Button className='mb-4' type="submit">submit</Button>
            </Form>
            </Card.Body>
            </Card>
