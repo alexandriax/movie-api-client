@@ -22,22 +22,18 @@ export const LoginView = ({ onLoggedIn }) => {
         }).then((response) => response.json())
         .then((data) => {
             console.log("login response: ", data);
-            if (data.user) {
+            if (data.user && data.token) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                localStorage.setItem("token", data.token);
                 onLoggedIn(data.user, data.token);
             } else {
-                alert("no such user!");
+                alert("no such user!")
             }
         })
         .catch((e) => {
             alert("something went wrong");
         });
-        if (data.user) {
-            localStorage.setItem("user", JSON.stringify(data.user));
-            localStorage.setItem("token", data.token);
-            onLoggedIn(data.user, data.token);
-        } else {
-            alert("no such user")
-        }
+     
     };
 
     return (
