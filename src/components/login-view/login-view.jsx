@@ -37,15 +37,15 @@ export const LoginView = ({ onLoggedIn }) => {
     };
 
     return (
-        <Container>
-            <Row>
-                <Col md={5}>
+        <Container className='d-flex justify-content-center align-items-center min-vh-100'>
+            <Row className='w-100'>
+                <Col md={8} lg={8}>
                     <CardGroup>
                         <Card>
                         <Card.Body>
-                        <Card.Title>log-in</Card.Title>
+                        <Card.Title className='mb-4'>log-in</Card.Title>
                         <Form onSubmit={handleSubmit}>
-                           <Form.Group>
+                           <Form.Group className='mb-4'>
                            <Form.Label>
                               Username:
                               <Form.Control
@@ -58,7 +58,7 @@ export const LoginView = ({ onLoggedIn }) => {
                           </Form.Label>
                           </Form.Group>
 
-                          <Form.Group>
+                          <Form.Group className='mb-4'>
                           <Form.Label>
                              Password:
                              <Form.Control
