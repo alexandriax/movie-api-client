@@ -28,12 +28,10 @@ export const MainView = () => {
         .then((data) => {
             const moviesFromApi = data.map((doc) => {
                 return {
-                    id: doc.id,
+                    id: doc._id,
                     title: doc.title,
-                    image: doc.image,
+                    image: doc.image || '',
                     description: doc.description,
-                    director: doc.director,
-                    genre: doc.genre
                 };
             });
 
