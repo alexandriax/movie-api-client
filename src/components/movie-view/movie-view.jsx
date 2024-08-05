@@ -2,19 +2,18 @@ import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 
-
 export const MovieView = ({ movies, user, token, onFavoriteToggle }) => {
     const { movieId } = useParams();
-    const movie = movies.find(m => m._id === movieId);
+    const movie = movies.find(m => m.id === movieId);
 
     if (!movie) {
         return <div>Movie not found</div>;
     }
 
-    const isFavorite = user.favoriteMovies.includes(movie._id);
+    const isFavorite = user.favoriteMovies.includes(movie.id); 
 
     const handleFavorite = () => {
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}/movies/${movie._id}`, {
+        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
             method: isFavorite ? 'DELETE' : 'POST',
             headers: { Authorization: `Bearer ${token}`}
         })
