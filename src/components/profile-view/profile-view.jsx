@@ -16,7 +16,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.Username}`, {
+        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}`, {
             method: 'PUT',
             headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
