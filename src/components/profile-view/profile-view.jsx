@@ -10,7 +10,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
 
     useEffect(() => {
         if (movies?.length > 0) {
-            setFavoriteMovies(movies.filter(m => user.favoriteMovies.includes(m._id)));
+            setFavoriteMovies(movies.filter(m => user.favoriteMovies.includes(m.id)));
         }
     }, [user, movies]);
 
@@ -89,7 +89,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                 <h2 style={{color: '#f9f8eb'}}>favorite movies</h2>
                 <Row>
                     {favoriteMovies.map(movie => (
-                        <Col md={4} key={movie._id}>
+                        <Col md={4} key={movie.id}>
                             <MovieCard 
                               movie={movie}
                               user={user}
