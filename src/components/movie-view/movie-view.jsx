@@ -40,11 +40,11 @@ export const MovieView = ({ movies, user, token, onFavoriteToggle }) => {
             </div>
             <div>
                 <span>Director: </span>
-                <span>{movie.director}</span> 
+                <span>{movie.director.name}</span> 
             </div>
             <div>
                 <span>Genre: </span>
-                <span>{movie.genre}</span>
+                <span>{movie.genre.name}</span>
             </div>
             <Link to={`/`}>
                 <Button className="back-button">Back</Button>
@@ -62,5 +62,6 @@ MovieView.propTypes = {
     token: PropTypes.string.isRequired,
     onFavoriteToggle: PropTypes.func.isRequired
 };
+
 
 
