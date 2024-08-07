@@ -12,8 +12,6 @@ export const LoginView = ({ onLoggedIn }) => {
         const data = {
             Username: username,
             Password: password
-            Username: username,
-            Password: password
         };
 
         fetch("https://moo-movies-10a7ea08abc9.herokuapp.com/login", {
