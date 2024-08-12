@@ -1,7 +1,30 @@
+//colors 
+$body-bg: #060606;
+$text-color: #fffafa;
+$link-hover-color: #fff4f4;
+$primary:#ffeddc;
+$danger: #cc8084;
+$dark: #181818;
+$card-title-color: #f9f8eb;
+$navbar-light-color: #f9f8eb;
+$navbar-light-brand-color: #f9f8eb;
+$card-height: 450px;
+$card-bg: #181818;
+$form-label-color: #f9f8eb;
+$input-color: #aeada4;
+$navbar-light-hover-color: #95948d;
+$navbar-light-active-color: #95948d;
+
+
+.card-img-top {
+    width: 100%;
+    height: 300px;
+};
+
+
+
+
+
+
 @import '~bootstrap/scss/bootstrap.scss';
 
-$color: steelblue;
-
-.my-flix {
-    color: $color;
-}
