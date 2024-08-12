@@ -1,14 +1,15 @@
+import React from 'react';
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
-  const isFavorite = user.favoriteMovies.includes(movie.id); 
+  const isFavorite = user.favoriteMovies.includes(movie.id);
 
-  const handleFavorite = (e) => {
-    fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
+  const handleFavorite = () => {
+    fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
       method: isFavorite ? 'DELETE' : 'POST',
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => response.json())
     .then(updatedUser => {
@@ -19,14 +20,15 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
   };
 
   return (
-    <Card className="clickable-card">
-      <Link to={`/movies/${encodeURIComponent(movie.id)}`} style={{ textDecoration: 'none' }}>
-        <Card.Img variant="top" src={movie.image}  />
-      </Link>
+    <Card>
+      <Card.Img variant="top" src={movie.image} />
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.director.name}</Card.Text>
-        <Card.Text>{movie.genre.name}</Card.Text>
+        <Card.Text>{movie.director}</Card.Text>
+        <Card.Text>{movie.genre}</Card.Text>
+        <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+          <Button variant="link">Open</Button>
+        </Link>
         <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavorite}>
           {isFavorite ? 'Unfavorite' : 'Favorite'}
         </Button>
@@ -54,8 +56,6 @@ MovieCard.propTypes = {
   token: PropTypes.string.isRequired,
   onFavoriteToggle: PropTypes.func.isRequired
 };
-
-
 
 
 
