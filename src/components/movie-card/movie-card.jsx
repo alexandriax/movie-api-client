@@ -39,8 +39,8 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     director: PropTypes.shape({
