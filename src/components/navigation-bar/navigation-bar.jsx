@@ -1,19 +1,46 @@
-import React from 'react';
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import MOO from '../../imgs/MOO.svg';
+import { setSearchQuery, fetchSearchResults } from '../../redux/actions';
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, token }) => {
+    const dispatch = useDispatch();
+    const [query, setQuery] = useState("");
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        dispatch(setSearchQuery(query));
+        dispatch(fetchSearchResults(query, token));
+    };
+
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to="/">
-                    movies app
+                    <img 
+                      src={MOO}
+                      alt='cow'
+                      style={{width: '100px', height: 'auto'}} 
+                    />
+                    moo movies
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="bsic-navbar-nav"/>
-                <Navbar.Collapse id="basuc-navbar-nav">
-                    <Nav className="me-auto">
-                        { !user && (
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ms-auto">
+                        <Form inline onSubmit={handleSearch} className="d-flex">
+                            <FormControl
+                                type="text"
+                                placeholder="Search"
+                                className="mr-sm-2"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                            />
+                            <Button type="submit" variant="primary">search</Button>
+                        </Form>
+                        {!user && (
                             <>
                                 <Nav.Link as={Link} to="/login">
                                     login
@@ -22,7 +49,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                     sign up
                                 </Nav.Link>
                             </>
-                        ) }
+                        )}
                         {user && (
                             <>
                                 <Nav.Link as={Link} to="/">
@@ -40,3 +67,10 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
         </Navbar>
     );
 };
+
+NavigationBar.propTypes = {
+    user: PropTypes.object,
+    onLoggedOut: PropTypes.func.isRequired,
+    token: PropTypes.string.isRequired
+};
+

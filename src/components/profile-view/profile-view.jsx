@@ -10,13 +10,13 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
 
     useEffect(() => {
         if (movies?.length > 0) {
-            setFavoriteMovies(movies.filter(m => user.favoriteMovies.includes(m._id)));
+            setFavoriteMovies(movies.filter(m => user.favoriteMovies.includes(m.id)));
         }
     }, [user, movies]);
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.Username}`, {
+        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}`, {
             method: 'PUT',
             headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
@@ -45,7 +45,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
     return (
         <Row>
             <Col md={6}>
-                <h2>profile</h2>
+                <h2 style={{color: '#f9f8eb'}}>profile</h2>
                 <Form onSubmit={handleUpdate}>
                     <Form.Group controlId="formUsername">
                         <Form.Label>username</Form.Label>
@@ -79,16 +79,17 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                             onChange={e => setUserData({ ...userData, Birthday: e.target.value })}
                         />
                     </Form.Group>
-
+                    <div className='d-flex justify-content-between mt-3'>
                     <Button variant="primary" type="submit">update</Button>
                     <Button variant="danger" onClick={handleDeregister}>delete account</Button>
+                    </div>
                 </Form>
             </Col>
             <Col md={6}>
-                <h2>favorite movies</h2>
+                <h2 style={{color: '#f9f8eb'}}>favorite movies</h2>
                 <Row>
                     {favoriteMovies.map(movie => (
-                        <Col md={4} key={movie._id}>
+                        <Col md={4} key={movie.id}>
                             <MovieCard 
                               movie={movie}
                               user={user}

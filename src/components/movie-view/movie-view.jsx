@@ -1,8 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
-
 
 export const MovieView = ({ movies, user, token, onFavoriteToggle }) => {
     const { movieId } = useParams();
@@ -12,7 +10,7 @@ export const MovieView = ({ movies, user, token, onFavoriteToggle }) => {
         return <div>Movie not found</div>;
     }
 
-    const isFavorite = user.favoriteMovies.includes(movie.id);
+    const isFavorite = user.favoriteMovies.includes(movie.id); 
 
     const handleFavorite = () => {
         fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
@@ -42,11 +40,11 @@ export const MovieView = ({ movies, user, token, onFavoriteToggle }) => {
             </div>
             <div>
                 <span>Director: </span>
-                <span>{movie.director}</span> 
+                <span>{movie.director.name}</span> 
             </div>
             <div>
                 <span>Genre: </span>
-                <span>{movie.genre}</span>
+                <span>{movie.genre.name}</span>
             </div>
             <Link to={`/`}>
                 <Button className="back-button">Back</Button>
@@ -64,7 +62,6 @@ MovieView.propTypes = {
     token: PropTypes.string.isRequired,
     onFavoriteToggle: PropTypes.func.isRequired
 };
-
 
 
 
