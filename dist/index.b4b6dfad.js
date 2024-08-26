@@ -44737,6 +44737,7 @@ ProfileView.propTypes = {
     user: (0, _propTypesDefault.default).object.isRequired,
     movies: (0, _propTypesDefault.default).array.isRequired,
     token: (0, _propTypesDefault.default).string.isRequired,
+    onFavoriteToggle: (0, _propTypesDefault.default).func.isRequired,
     onLoggedOut: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
