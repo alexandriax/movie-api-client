@@ -107,5 +107,6 @@ ProfileView.propTypes = {
     user: PropTypes.object.isRequired,
     movies: PropTypes.array.isRequired,
     token: PropTypes.string.isRequired,
+    onFavoriteToggle: PropTypes.func.isRequired,
     onLoggedOut: PropTypes.func.isRequired
 };
