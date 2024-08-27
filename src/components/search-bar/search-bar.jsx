@@ -1,39 +1,63 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery, setSearchResults } from '../../redux/actions';
-import { Form, Button, InputGroup } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Form, FormControl, Button } from 'react-bootstrap';
 
-export const SearchBar = () => {
-    const dispatch = useDispatch();
-    const query = useSelector((state) => state.searchQuery);
 
-    const handleSearch = (event) => {
-        event.preventDefault();
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/movies?search=${query}`,
-            {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}}
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            dispatch(setSearchResults(data));
-          })
-          .catch((error) => {
-            console.error('error finding results:', error);
-          });
-    };
+export const SearchBar = ({ token }) => {
+  const [apiMovies, setApiMovies] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [searchItem, setSearchItem] = useState('')
+  const [filteredMovies, setFilteredMovies] = useState([])
 
-    return (
-        <Form onSubmit={handleSearch} className='mb-4'>
-            <InputGroup>
-                <Form.Control
-                  type='text'
-                  placeholder='search for a movie'
-                  value={query}
-                  onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-                />
-                <Button variant='primary' type='submit'>
-                    search
-                </Button>
-            </InputGroup>
-        </Form>
-    );
+  useEffect(() => {
+    if(!token) return;
+
+    fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(response => response.json())
+    .then(data => {
+      setApiMovies(data)
+      setFilteredMovies(data)
+    })
+    .catch(err => {
+      console.log(err)
+      setError(err)
+  })
+  .finally(() => {
+    setLoading(false)
+  })
+  }, [token]);
+
+  const handleInputChange = (e) => {
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm);
+  
+  if (apiMovies && apiMovies.length > 0) {
+  const filteredItems = apiMovies.filter((movie) =>
+    movie.title && movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  setFilteredMovies(filteredItems);
+  }
+  };
+
+
+
+  return (
+    <Form className="d-flex">
+      <FormControl
+        type='text'
+        placeholder='search movies'
+        className='mr-sm-2'
+        value={searchItem}
+        onChange={handleInputChange}
+        />
+        <Button variant='primary' type='submit'>search</Button>
+      
+    </Form>
+  );
 };
+
+

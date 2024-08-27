@@ -1,45 +1,22 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { Col, Row, Container } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
-import { SearchBar } from "../search-bar/search-bar";
-import { SearchResults } from "../search-bar/search-results";
 
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
-    const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-    const storedToken = localStorage.getItem('token');
-    const [user, setUser] = useState(storedUser ? storedUser : null);
-    const [token, setToken] = useState(storedToken ? storedToken : null);
-
-    useEffect(() => {
-        if (!token) {
-            return;
-        }
-        fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies', {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            const moviesFromApi = data?.map((doc) => {
-                return {
-                    id: doc.id,
-                    title: doc.title,
-                    image: doc.image || '',
-                    description: doc.description,
-                    director: doc.director?.name,
-                    genre: doc.genre?.name
-                };
-            });
-            setMovies(moviesFromApi);
-        });
-    }, [token]);
+    const [filteredMovies, setFilteredMovies] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+    
+    const [locationKey, setLocationKey] = useState(0);
 
     const handleLogin = (user, token) => {
         setUser(user);
@@ -58,13 +35,60 @@ export const MainView = () => {
         setUser(updatedUser);
     };
 
+    const handleSearch = (term) => {
+        setSearchTerm(term);
+    };
+
+    useEffect(() => {
+        if (!token) {
+            return;
+        }
+        fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            const moviesFromApi = data?.map((doc) => ({
+                id: doc.id,
+                title: doc.title,
+                image: doc.image || '',
+                description: doc.description,
+                director: {
+                    name: doc.director?.name,
+                    description: doc.director?.description || ''
+                },
+                genre: {
+                    name: doc.genre?.name,
+                    description: doc.genre?.description || ''
+                },
+            }));
+            setMovies(moviesFromApi);
+            setFilteredMovies(moviesFromApi);
+        });
+    }, [token]);
+
+    useEffect(() => {
+        const filtered = movies.filter((movie) =>
+            movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            movie.director.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            movie.genre.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredMovies(filtered);
+    }, [searchTerm, movies]);
+
+   
+    useEffect(() => {
+        setSearchTerm('');
+        setFilteredMovies(movies);
+    }, [movies]);
+
+
     return (
         <BrowserRouter>
-            <NavigationBar user={user} onLoggedOut={handleLogout} />
+            <NavigationBar user={user} onLoggedOut={handleLogout} token={token} onSearch={handleSearch} />
             <Container>
-              
                 <Row className="justify-content-md-center">
-                    <Routes>
+                    <Routes key={locationKey}>
                         <Route
                             path="/signup"
                             element={
@@ -94,11 +118,11 @@ export const MainView = () => {
                             element={
                                 !user ? (
                                     <Navigate to="/login" replace />
-                                ) : movies?.length === 0 ? (
+                                ) : filteredMovies?.length === 0 ? (
                                     <Col>The list is empty!</Col>
                                 ) : (
                                     <MovieView
-                                        movies={movies}
+                                        movies={filteredMovies}
                                         user={user}
                                         token={token}
                                         onFavoriteToggle={handleFavoriteToggle}
@@ -112,7 +136,7 @@ export const MainView = () => {
                                 !user ? (
                                     <Navigate to="/login" replace />
                                 ) : (
-                                    <ProfileView user={user} movies={movies} token={token} onLoggedOut={handleLogout} />
+                                    <ProfileView user={user} movies={filteredMovies} token={token} onLoggedOut={handleLogout} onFavoriteToggle={handleFavoriteToggle} />
                                 )
                             }
                         />
@@ -125,27 +149,18 @@ export const MainView = () => {
                                     <Col>The list is empty!</Col>
                                 ) : (
                                     <>
-                                        {movies?.map((movie) => (
+                                        {filteredMovies?.map((movie) => (
                                             <Col className="mb-4" key={movie.id} md={3}>
                                                 <MovieCard
                                                     movie={movie}
                                                     user={user}
                                                     token={token}
                                                     onFavoriteToggle={handleFavoriteToggle}
+                                                    director={movie.director}
                                                 />
                                             </Col>
                                         ))}
                                     </>
-                                )
-                            }
-                        />
-                        <Route
-                            path="/search"
-                            element={
-                                !user ? (
-                                    <Navigate to="/login" replace />
-                                ) : (
-                                    <SearchResults />
                                 )
                             }
                         />
@@ -155,5 +170,7 @@ export const MainView = () => {
         </BrowserRouter>
     );
 };
+
+
 
 
