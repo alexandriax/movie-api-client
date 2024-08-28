@@ -2,15 +2,9 @@ import { Navbar, Container, Nav, Form, FormControl, Button } from "react-bootstr
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import MOO from '../../imgs/MOO.svg';
-import { useEffect, useState } from 'react';
+import { SearchBar } from '../search-bar/search-bar';
 
-export const NavigationBar = ({ user, onLoggedOut, token, onSearch }) => {
-    const [query, setQuery] = useState("");
-
-    const handleSearch = (event) => {
-        event.preventDefault();
-        onSearch(query); 
-    };
+export const NavigationBar = ({ user, onLoggedOut, token, onMoviesFiltered }) => {
 
     return (
         <Navbar bg="dark" expand="lg">
@@ -26,17 +20,7 @@ export const NavigationBar = ({ user, onLoggedOut, token, onSearch }) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Form inline onSubmit={handleSearch} className="d-flex">
-                            <FormControl
-                                id="search-bar"
-                                type="text"
-                                placeholder="Search"
-                                className="mr-sm-2"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                            />
-                            <Button type="submit" variant="primary">Search</Button>
-                        </Form>
+                        <SearchBar token={token} onMoviesFiltered={onMoviesFiltered} />
                         {!user && (
                             <>
                                 <Nav.Link as={Link} to="/login">
@@ -69,7 +53,7 @@ NavigationBar.propTypes = {
     user: PropTypes.object,
     onLoggedOut: PropTypes.func.isRequired,
     token: PropTypes.string.isRequired,
-    onSearch: PropTypes.func.isRequired
+    onMoviesFiltered: PropTypes.func.isRequired
 };
 
 

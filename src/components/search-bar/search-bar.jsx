@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
+import Proptypes from 'prop-types';
 
 
-export const SearchBar = ({ token }) => {
+export const SearchBar = ({ token, onMoviesFiltered }) => {
   const [apiMovies, setApiMovies] = useState([])
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchItem, setSearchItem] = useState('')
   const [filteredMovies, setFilteredMovies] = useState([])
@@ -20,27 +20,26 @@ export const SearchBar = ({ token }) => {
     .then(data => {
       setApiMovies(data)
       setFilteredMovies(data)
+      onMoviesFiltered(data)
     })
     .catch(err => {
       console.log(err)
       setError(err)
   })
-  .finally(() => {
-    setLoading(false)
-  })
+
   }, [token]);
 
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchItem(searchTerm);
   
-  if (apiMovies && apiMovies.length > 0) {
   const filteredItems = apiMovies.filter((movie) =>
     movie.title && movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   setFilteredMovies(filteredItems);
-  }
+  onMoviesFiltered(filteredItems);
+  
   };
 
 
@@ -58,6 +57,11 @@ export const SearchBar = ({ token }) => {
       
     </Form>
   );
+};
+
+SearchBar.propTypes = {
+  token: Proptypes.string.isRequired,
+  onMoviesFiltered:Proptypes.func.isRequired
 };
 
 

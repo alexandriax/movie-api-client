@@ -8,15 +8,14 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
+import { SearchBar } from "../search-bar/search-bar";
+
 
 export const MainView = () => {
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState([]); 
     const [filteredMovies, setFilteredMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
-    
-    const [locationKey, setLocationKey] = useState(0);
 
     const handleLogin = (user, token) => {
         setUser(user);
@@ -35,60 +34,35 @@ export const MainView = () => {
         setUser(updatedUser);
     };
 
-    const handleSearch = (term) => {
-        setSearchTerm(term);
-    };
+   const handleMoviesFiltered = (movies) => {
+    setFilteredMovies(movies);
+   };
 
-    useEffect(() => {
-        if (!token) {
-            return;
-        }
+   useEffect(() => {
+    if (token) {
         fetch('https://moo-movies-10a7ea08abc9.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then((response) => response.json())
-        .then((data) => {
-            const moviesFromApi = data?.map((doc) => ({
-                id: doc.id,
-                title: doc.title,
-                image: doc.image || '',
-                description: doc.description,
-                director: {
-                    name: doc.director?.name,
-                    description: doc.director?.description || ''
-                },
-                genre: {
-                    name: doc.genre?.name,
-                    description: doc.genre?.description || ''
-                },
-            }));
-            setMovies(moviesFromApi);
-            setFilteredMovies(moviesFromApi);
-        });
+            .then(response => response.json())
+            .then(data => {
+                setMovies(data);
+                setFilteredMovies(data);
+            })
+            .catch(err => console.error(err));
+        }
     }, [token]);
-
-    useEffect(() => {
-        const filtered = movies.filter((movie) =>
-            movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            movie.director.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            movie.genre.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredMovies(filtered);
-    }, [searchTerm, movies]);
-
-   
-    useEffect(() => {
-        setSearchTerm('');
-        setFilteredMovies(movies);
-    }, [movies]);
 
 
     return (
         <BrowserRouter>
-            <NavigationBar user={user} onLoggedOut={handleLogout} token={token} onSearch={handleSearch} />
+        
+            
+            <NavigationBar user={user} onLoggedOut={handleLogout} token={token} onMoviesFiltered={handleMoviesFiltered} />
+        
             <Container>
                 <Row className="justify-content-md-center">
-                    <Routes key={locationKey}>
+              
+                    <Routes>
                         <Route
                             path="/signup"
                             element={
