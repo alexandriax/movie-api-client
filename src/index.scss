@@ -18,8 +18,64 @@ $navbar-light-active-color: #95948d;
 
 .card-img-top {
     width: 100%;
-    height: 300px;
+    height: 265px;
 };
+
+.card-text {
+    color: $text-color
+}
+
+.single-movie{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: $text-color;
+    justify-content: stretch;
+
+
+    img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+}
+
+.big-words {
+    font-size: 24px;
+    font-weight: bold;
+    color: $card-title-color;
+   
+}
+
+.info{
+    margin-bottom: 50px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.back-button {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.fav-button {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
 
 
 

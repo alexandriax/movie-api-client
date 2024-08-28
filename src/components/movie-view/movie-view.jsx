@@ -26,32 +26,34 @@ export const MovieView = ({ movies, user, token, onFavoriteToggle }) => {
     };
 
     return (
-        <div>
+        <div className='single-movie'>
             <div>
                 <img src={movie.image} />
             </div>
             <div>
-                <span>Title: </span>
-                <span>{movie.title}</span>
+                <span className='big-words'>Title: </span> <br></br>
+                <span className='info'>{movie.title}</span>
             </div>
             <div>
-                <span>Description: </span>
-                <span>{movie.description}</span>
+                <span className='big-words'>Description: </span> <br></br>
+                <span className='info'>{movie.description}</span>
             </div>
             <div>
-                <span>Director: </span>
-                <span>{movie.director.name}</span> 
+                <span className='big-words'>Director: </span> <br></br>
+                <span className='info'>{movie.director.name}</span> 
             </div>
             <div>
-                <span>Genre: </span>
+                <span className='big-words'>Genre: </span> <br></br>
                 <span>{movie.genre.name}</span>
             </div>
+            <div className='btn-container'>
             <Link to={`/`}>
                 <Button className="back-button">Back</Button>
             </Link>
-            <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavorite}>
+            <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavorite} className='fav-button'>
                 {isFavorite ? 'Unfavorite' : 'Favorite'}
             </Button>
+            </div>
         </div>
     );
 };
