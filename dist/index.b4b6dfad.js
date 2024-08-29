@@ -2983,10 +2983,8 @@ const App = ()=>{
     }, undefined);
 };
 _c = App;
-//finds root of app
 const container = document.querySelector("#root");
 const root = (0, _client.createRoot)(container);
-//tells react how to render app in root DOM element
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
     fileName: "src/index.jsx",
     lineNumber: 25,
