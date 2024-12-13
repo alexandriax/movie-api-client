@@ -43697,8 +43697,8 @@ const LoginView = ({ onLoggedIn })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            Username: username,
-            Password: password
+            username: username,
+            password: password
         };
         fetch("https://moo-movies-10a7ea08abc9.herokuapp.com/login", {
             method: "POST",
@@ -43916,7 +43916,7 @@ const SignupView = ()=>{
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                                 className: "mb-4",
                                                 children: [
-                                                    "Username:",
+                                                    "username:",
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                                         type: "text",
                                                         value: username,
@@ -44450,10 +44450,10 @@ const ProfileView = ({ user, movies, token, onLoggedOut })=>{
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                         type: "text",
-                                        value: userData.Username,
+                                        value: userData.username,
                                         onChange: (e)=>setUserData({
                                                 ...userData,
-                                                Username: e.target.value
+                                                username: e.target.value
                                             })
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",

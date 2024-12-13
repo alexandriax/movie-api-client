@@ -9,8 +9,8 @@ export const LoginView = ({ onLoggedIn }) => {
         event.preventDefault();
 
         const data = {
-            Username: username,
-            Password: password
+            username: username,
+            password: password
         };
 
         fetch("https://moo-movies-10a7ea08abc9.herokuapp.com/login", {
@@ -47,7 +47,7 @@ export const LoginView = ({ onLoggedIn }) => {
                         <Form onSubmit={handleSubmit}>
                            <Form.Group className='mb-4'>
                            <Form.Label>
-                              Username:
+                              username:
                               <Form.Control
                                   type="text"
                                   value={username}
@@ -60,7 +60,7 @@ export const LoginView = ({ onLoggedIn }) => {
 
                           <Form.Group className='mb-4'>
                           <Form.Label>
-                             Password:
+                             password:
                              <Form.Control
                                  type="password"
                                  value={password}
