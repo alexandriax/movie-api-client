@@ -43,7 +43,7 @@ export const SignupView = () => {
             <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label className='mb-4'>
-                username:
+                Username:
                <Form.Control
                   type="text"
                   value={username}
@@ -56,7 +56,7 @@ export const SignupView = () => {
              </Form.Group>
             <Form.Group>
               <Form.Label className='mb-4'>
-                password:
+                Password:
                <Form.Control
                   type="password"
                   value={password}

@@ -51,16 +51,16 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                         <Form.Label>username</Form.Label>
                         <Form.Control
                             type="text"
-                            value={userData.username}
-                            onChange={e => setUserData({ ...userData, username: e.target.value })}
+                            value={userData.Username}
+                            onChange={e => setUserData({ ...userData, Username: e.target.value })}
                         />
                     </Form.Group>
                     <Form.Group controlId="formPassword">
                         <Form.Label>password</Form.Label>
                         <Form.Control
                             type="password"
-                            value={userData.password}
-                            onChange={e => setUserData({ ...userData, password: e.target.value })}
+                            value={userData.Password}
+                            onChange={e => setUserData({ ...userData, Password: e.target.value })}
                         />
                     </Form.Group>
                     <Form.Group controlId="formEmail">
