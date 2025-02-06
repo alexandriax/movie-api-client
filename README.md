@@ -8,3 +8,5 @@ this project is a wip that I'm using to learn react. moo movies allows users to 
 - redux
 - parcel
 
+The latest version is hosted [here](https://moo-movies.netlify.app/)
+
