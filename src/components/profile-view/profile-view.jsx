@@ -10,7 +10,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
 
     useEffect(() => {
         if (movies?.length > 0) {
-            setFavoriteMovies(movies.filter(m => user.favoriteMovies.includes(m.id)));
+            setFavoriteMovies(movies.filter(m => user.favoriteMovies.includes(m._id)));
         }
     }, [user, movies]);
 
