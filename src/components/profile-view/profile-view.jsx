@@ -16,7 +16,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.user._id}`, {
+        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user._id}`, {
             method: 'PUT',
             headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
@@ -67,7 +67,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                         <Form.Label>email</Form.Label>
                         <Form.Control
                             type="email"
-                            value={userData.Email}
+                            value={userData.email}
                             onChange={e => setUserData({ ...userData, email: e.target.value })}
                         />
                     </Form.Group>
@@ -75,7 +75,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                         <Form.Label>birthday</Form.Label>
                         <Form.Control
                             type="date"
-                            value={userData.Birthday}
+                            value={userData.birthday}
                             onChange={e => setUserData({ ...userData, birthday: e.target.value })}
                         />
                     </Form.Group>
@@ -94,6 +94,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                               movie={movie}
                               user={user}
                               token={token}
+                              onFavoriteToggle={setUserData}
                               />
                         </Col>
                     ))}
