@@ -18,6 +18,7 @@ export const MainView = () => {
     const [token, setToken] = useState(null);
 
     const handleLogin = (user, token) => {
+        user.favoriteMovies = user.favoriteMovies || [];
         setUser(user);
         setToken(token);
         localStorage.setItem('user', JSON.stringify(user));

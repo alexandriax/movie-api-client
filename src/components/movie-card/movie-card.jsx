@@ -3,7 +3,7 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
-  const isFavorite = user.favoriteMovies.includes(movie._id); 
+  const isFavorite = user.favoriteMovies?.includes(movie._id) || false; 
 
   const handleFavorite = (e) => {
     fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.user._id}/movies/${movie._id}`, {
