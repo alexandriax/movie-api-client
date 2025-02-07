@@ -27,7 +27,7 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.director.name}</Card.Text>
         <Card.Text>{movie.genre.name}</Card.Text>
-        <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavorite}>
+        <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavoriteToggle}>
           {isFavorite ? 'Unfavorite' : 'Favorite'}
         </Button>
       </Card.Body>
