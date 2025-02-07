@@ -16,7 +16,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}`, {
+        fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.user._id}`, {
             method: 'PUT',
             headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
@@ -31,7 +31,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
     };
 
     const handleDeregister = () => {
-         fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}`, {
+         fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.user._id}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}`}
         })
@@ -51,16 +51,16 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                         <Form.Label>username</Form.Label>
                         <Form.Control
                             type="text"
-                            value={userData.Username}
-                            onChange={e => setUserData({ ...userData, Username: e.target.value })}
+                            value={userData.username}
+                            onChange={e => setUserData({ ...userData, username: e.target.value })}
                         />
                     </Form.Group>
                     <Form.Group controlId="formPassword">
                         <Form.Label>password</Form.Label>
                         <Form.Control
                             type="password"
-                            value={userData.Password}
-                            onChange={e => setUserData({ ...userData, Password: e.target.value })}
+                            value={userData.password}
+                            onChange={e => setUserData({ ...userData, password: e.target.value })}
                         />
                     </Form.Group>
                     <Form.Group controlId="formEmail">
@@ -68,7 +68,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                         <Form.Control
                             type="email"
                             value={userData.Email}
-                            onChange={e => setUserData({ ...userData, Email: e.target.value })}
+                            onChange={e => setUserData({ ...userData, email: e.target.value })}
                         />
                     </Form.Group>
                     <Form.Group controlId="formBirthday">
@@ -76,7 +76,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                         <Form.Control
                             type="date"
                             value={userData.Birthday}
-                            onChange={e => setUserData({ ...userData, Birthday: e.target.value })}
+                            onChange={e => setUserData({ ...userData, birthday: e.target.value })}
                         />
                     </Form.Group>
                     <div className='d-flex justify-content-between mt-3'>
@@ -89,7 +89,7 @@ export const ProfileView = ({ user, movies, token, onLoggedOut }) => {
                 <h2 style={{color: '#f9f8eb'}}>favorite movies</h2>
                 <Row>
                     {favoriteMovies.map(movie => (
-                        <Col md={4} key={movie.id}>
+                        <Col md={4} key={movie._id}>
                             <MovieCard 
                               movie={movie}
                               user={user}

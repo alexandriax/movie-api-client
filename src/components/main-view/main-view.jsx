@@ -124,7 +124,7 @@ export const MainView = () => {
                                 ) : (
                                     <>
                                         {filteredMovies?.map((movie) => (
-                                            <Col className="mb-4" key={movie.id} md={3}>
+                                            <Col className="mb-4" key={movie._id} md={3}>
                                                 <MovieCard
                                                     movie={movie}
                                                     user={user}

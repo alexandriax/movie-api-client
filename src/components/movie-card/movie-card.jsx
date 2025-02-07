@@ -3,10 +3,10 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
-  const isFavorite = user.favoriteMovies.includes(movie.id); 
+  const isFavorite = user.favoriteMovies.includes(movie._id); 
 
   const handleFavorite = (e) => {
-    fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
+    fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.user._id}/movies/${movie._id}`, {
       method: isFavorite ? 'DELETE' : 'POST',
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -20,7 +20,7 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
 
   return (
     <Card className="clickable-card">
-      <Link to={`/movies/${encodeURIComponent(movie.id)}`} style={{ textDecoration: 'none' }}>
+      <Link to={`/movies/${encodeURIComponent(movie._id)}`} style={{ textDecoration: 'none' }}>
         <Card.Img variant="top" src={movie.image}  />
       </Link>
       <Card.Body>
