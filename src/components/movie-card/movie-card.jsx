@@ -6,7 +6,7 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
   const isFavorite = user.favoriteMovies?.includes(movie._id) || false; 
 
   const handleFavorite = (e) => {
-    fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user.user._id}/movies/${movie._id}`, {
+    fetch(`https://moo-movies-10a7ea08abc9.herokuapp.com/users/${user._id}/movies/${movie._id}`, {
       method: isFavorite ? 'DELETE' : 'POST',
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -27,7 +27,7 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.director.name}</Card.Text>
         <Card.Text>{movie.genre.name}</Card.Text>
-        <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavoriteToggle}>
+        <Button variant={isFavorite ? 'danger' : 'primary'} onClick={handleFavorite}>
           {isFavorite ? 'Unfavorite' : 'Favorite'}
         </Button>
       </Card.Body>
@@ -37,7 +37,7 @@ export const MovieCard = ({ movie, user, token, onFavoriteToggle }) => {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
